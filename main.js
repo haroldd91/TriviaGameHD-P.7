@@ -6,18 +6,19 @@ var countStartNumber = 30;
 var questions = [
     
     {
-        question: "What animal weighs the most?",
+        question: "What animal listed weighs the most?",
         answers: ["A elephant", "A giraffe", "A rhino", "A blue whale"],
         correctAnswer: "A blue whale",
-        image: "assets\yea.gif"
+        image: "assets/yea.gif"
     },
 
     {
         question: "Which one of these animals are nocturnal?",
         answers: ["Shark", "Dog", "Rabbit", "Deer"],
         correctAnswer: "Shark",
-        image: "assets\yeaa.gif"
+        image: "assets/yeaa.gif"
     }
+
 
 ]
 
@@ -41,15 +42,14 @@ var game = {
         }
     },
 
-    
     loadQuestion: function() {
         timer = setInterval(game.countdown, 1000);
         panel.html("<h2>" + questions[this.currentQuestion].question + "</h2>");
         for (var i = 0; i < questions[this.currentQuestion].answers.length; i++)
         {
-            panel.append("<button class='answer-button' id='button' data-name=' " +
-            questions[this.currentQuestion].answer[i] + 
-            "'>" + question[this.currentQuestion].answers[i] + "</button>");
+            panel.append("<button class='answer-button' id='button' data-name='" +
+            questions[this.currentQuestion].answers[i] +
+            "'>" + questions[this.currentQuestion].answers[i] + "</button>");
         }
     },
 
@@ -68,7 +68,7 @@ var game = {
 
         panel.html("<h2>Out of Time!</h2>");
         panel.append("<h3>The Correct Answer was: " + questions[this.currentQuestion].correctAnswer);
-        panel.append("<img src='" + questions[this.currentQuestion].image + "'/>")
+        panel.append("<img src='" + questions[this.currentQuestion].image + "'/>" );
 
         if (game.currentQuestion === questions.length - 1)
         {
@@ -79,14 +79,13 @@ var game = {
             setTimeout(game.nextQuestion, 3 * 1000);
         }
 
-
     },
 
     results: function() {
 
         clearInterval(timer);
 
-        panel.html("<h2>All done, here's how you did1</h2>");
+        panel.html("<h2>All done, here's how you did!</h2>");
 
         $("#counter-number").html(game.counter);
 
@@ -94,12 +93,13 @@ var game = {
         panel.append("<h3>Incorrect Answers: " + game.incorrect + "</h3>");
         panel.append("<h3>Unanswered: " + (questions.length - (game.correct + game.incorrect)) + "</h3>");
         panel.append("<br><button id='start-over'>Start Over?</button>");
+        
     },
 
     clicked: function(e) {
 
         clearInterval(timer);
-        if ($(e.target).attr("data-name") === questions[this.currentQuestion].correctAnswer)
+        if ($(e.target).attr("data-name") === questions[this.currentQuestion].correctAnswer) 
         {
             this.answeredCorrectly();
         }
@@ -137,7 +137,7 @@ var game = {
 
         clearInterval(timer);
 
-        panel.html("<h2>Nice!</h2>");
+        panel.html("<h2>Correct!</h2>");
         panel.append("<img src='" + questions[game.currentQuestion].image + "'/>" );
 
         if (game.currentQuestion === questions.length - 1)
@@ -162,3 +162,19 @@ var game = {
     }
 
 };
+
+
+// CLICK EVENTS
+// ----------------------------------------------------------------
+$(document).on("click", "#start-over", function() {
+    game.reset();
+});
+
+$(document).on("click", ".answer-button", function(e) {
+    game.clicked(e);
+});
+
+$(document).on("click", "#start", function() {
+    $("#sub-wrapper").prepend("<h2>Time Remaining: <span id='counter-number'>30 </span> Seconds</h2>");
+    game.loadQuestion();
+});

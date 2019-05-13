@@ -17,8 +17,28 @@ var questions = [
         answers: ["Shark", "Dog", "Rabbit", "Deer"],
         correctAnswer: "Shark",
         image: "assets/yeaa.gif"
-    }
+    },
 
+    {
+        question: "Which aquatic animal listed does not have any gills?",
+        answers: ["Goldfish", "Dolphin", "Anglerfish", "Catfish"],
+        correctAnswer: "Dolphin",
+        image: "assets/yeaaa.gif"
+    },
+
+    {
+        question: "What is a rhinoceros' horn made out of?",
+        answers: ["Skin", "Stone", "Hair", "Rock"],
+        correctAnswer: "Hair",
+        image: "assets/yeaaaa.gif"
+    },
+
+    {
+        question: "Up to how how long can a snail sleep?",
+        answers: ["6 Months", "A year", "15 days", "3 years"],
+        correctAnswer: "3 years",
+        image: "assets/yeaaaaa.gif"
+    }
 
 ]
 
@@ -37,7 +57,7 @@ var game = {
         game.counter--;
         $("#counter-number").html(game.counter);
         if (game.counter === 0) {
-            console.log("TIMES UP");
+            console.log("TIME UP");
             game.timeUp();
         }
     },
